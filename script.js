@@ -37,13 +37,16 @@ const labelSumIn = document.querySelector('.summary__value--in');
 const labelSumOut = document.querySelector('.summary__value--out');
 const labelSumCashBack = document.querySelector('.summary__value--interest');
 const labelTimer = document.querySelector('.timer');
+
 const containerApp = document.querySelector('.app');
 const containerMovements = document.querySelector('.movements');
+
 const btnLogin = document.querySelector('.login__btn');
 const btnTransfer = document.querySelector('.form__btn--transfer');
 const btnLoan = document.querySelector('.form__btn--loan');
 const btnClose = document.querySelector('.form__btn--close');
 const btnSort = document.querySelector('.btn--sort');
+
 const inputLoginUsername = document.querySelector('.login__input--user');
 const inputLoginPin = document.querySelector('.login__input--pin');
 const inputTransferTo = document.querySelector('.form__input--to');
@@ -51,6 +54,12 @@ const inputTransferAmount = document.querySelector('.form__input--amount');
 const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
+
+// modal 
+const Modal = document.getElementById(`Modal`)
+const icon = document.getElementById(`icon`)
+
+
 
 function displayMovements(movements) {
   // movements => [200, 450, -400, 3000, -650, -130, 70, 1300],
@@ -95,9 +104,59 @@ function displaySummary(account) {
   labelSumCashBack.textContent = `${cashback}$`;
 }
 
-displayMovements(accaunt1.movements);
-displayBalance(accaunt1.movements);
-displaySummary(accaunt1);
+//username
+
+accaunts.forEach(acc => {
+  let userName = acc.owner
+  .toLowerCase()
+  .split(' ')
+  .map(el => el[0])
+  .join('');
+  acc.userName = userName;
+});
+
+/////////////////////////////// Events ////////////////////////////////
+let currentUser;
+btnLogin.addEventListener('click', function(e){
+  e.preventDefault();
+  // inputLoginUsername
+
+  let user = accaunts.find(acc => inputLoginUsername.value == acc.userName);
+
+  if(!user || inputLoginPin.value != user.pin){
+    document.getElementById('Modal').style.display = 'block';    
+    document.getElementById('overlay').style.display = 'block';    
+    return;
+  }
+
+  currentUser = user;
+
+  inputLoginUsername.value = inputLoginPin.value = '';
+
+  //shiw UI
+
+  labelWelcome.textContent = `Hello, ${currentUser.owner.split(' ')[0]}!`
+
+  containerApp.style.opacity = 1;
+
+  displayMovements(currentUser.movements);
+  displayBalance(currentUser.movements);
+  displaySummary(currentUser);
+});
+
+// icon.getElementById('click', function() {
+//   document.getElementById('Modal').style.display = 'none';
+// });
+
+document.getElementById('icon').addEventListener('click', function() {
+  document.getElementById('Modal').style.display = 'none';
+  document.getElementById('overlay').style.display = 'none';
+});
+document.getElementById('overlay').addEventListener('click', function() {
+  document.getElementById('Modal').style.display = 'none';
+  document.getElementById('overlay').style.display = 'none';
+});
+
 
 const currencies = new Map([
   ['USD', 'United States dollar'],
@@ -105,4 +164,5 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];  
+

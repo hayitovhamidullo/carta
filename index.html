@@ -11,11 +11,23 @@
       rel="stylesheet"
     />
 
+    <script src="https://kit.fontawesome.com/7992928c53.js" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="style.css" />
     <title>Bankist</title>
   </head>
   <body>
     <!-- TOP NAVIGATION -->
+
+    <div class="modal" id="Modal">
+      <ul class="modal_text">
+        <li><p class="icon" id="icon"><i class="fa-solid fa-circle-xmark"></i></p></li>
+        <li><p class="text">You have entered a wrong password or username</p></li>
+      </ul>
+    </div>
+
+    <div class="overflo" id="overlay"></div>
+    
     <nav>
       <p class="welcome">Log in to get started</p>
       <img src="logo.png" alt="logo" class="logo" />
