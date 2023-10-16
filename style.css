@@ -71,8 +71,8 @@
   
   .login__btn:hover,
   .login__btn:focus,
-  .btn--sort:hover,
-  .btn--sort:focus {
+  .btn-sort:hover,
+  .btn-sort:focus {
     outline: none;
     color: #777;
   }
@@ -186,7 +186,7 @@
     color: #f5465d;
   }
   
-  .btn--sort {
+  .btn-sort {
     margin-left: auto;
     border: none;
     background: none;
@@ -422,7 +422,7 @@
     color: #f5465d;
   }
   
-  .btn--sort {
+  .btn-sort {
     margin-left: auto;
     border: none;
     background: none;
